@@ -1,15 +1,15 @@
 //create web server
-const express = require('express');
+import express from 'express';
 const app = express();
-const bodyParser = require('body-parser');
-const fs = require('fs');
+import { json, urlencoded } from 'body-parser';
+import { readFileSync } from 'fs';
 
 //read file
-let comments = JSON.parse(fs.readFileSync('comments.json'));
+let comments = JSON.parse(readFileSync('comments.json'));
 
 //parse data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
 //get all comments
 app.get('/comments', (req, res) => {
